@@ -1,4 +1,7 @@
 import ROOT
+#******************************************************************************************************
+# c++ function that is used to find closest GenJet/Jet in weak/strong match
+# returns index rvec of the object indixes for both bGenPart/bGenJet, for example: {3, 10}
 
 ROOT.gInterpreter.Declare("""
 
@@ -40,6 +43,10 @@ const ROOT::RVec<std::size_t> FindClosest(const ROOT::RVec<float>& ref_phi, cons
 };
 """)
 #******************************************************************************************************
+# c++ function made by Vilja that is similar to the one above but returns deltaRs instead of indices.
+# This is used at least in viljaFilters (for example viljaFilter.py)
+# I just noticed that this returns RVec<std::size_t> instead of RVec<float> which might be better since deltaR is continuous variable and not a natural number. I recommend checking this.
+
 ROOT.gInterpreter.Declare("""
 using namespace ROOT::VecOps;
 const ROOT::RVec<std::size_t> FindClosestDeltaR(const ROOT::RVec<float>& ref_phi, ROOT::RVec<float>& ref_eta,

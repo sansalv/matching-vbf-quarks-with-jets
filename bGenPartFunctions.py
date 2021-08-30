@@ -1,4 +1,7 @@
 import ROOT
+#******************************************************************************************************
+# c++ function that determines from the pdgId if particle GenPart is neutrino (this is used later)
+# returns bool
 
 ROOT.gInterpreter.Declare("""
 using namespace ROOT::VecOps;
@@ -12,6 +15,12 @@ const bool isNeutrino(const Int_t& idx, const ROOT::RVec<std::size_t>& pdgId){
 };
 """)
 #******************************************************************************************************
+# c++ function that returns last GenParts indices for each quark sorted by pT (biggest to smallest for each quark)
+# returns rvec of two index rvecs, for example: {{20,7,19}, {9, 21, 41, 25}}
+
+# This complicated looking function is almost the same than eventLoop(...) python function in the printEventsFunctions.py
+# If you want to understand this, I recommend checking the eventLoop(...), which is fully commented and explained
+
 ROOT.gInterpreter.Declare("""
 
 using namespace ROOT::VecOps;
@@ -72,6 +81,11 @@ const ROOT::RVec<ROOT::RVec<std::size_t>> FindBestChildren_indices(const std::si
 };
 """)
 #******************************************************************************************************
+# c++ that uses the previous index lists (FindBestChildren_indices function) and neutrino recognition (isNeutrino)
+# returns the best final GenPart indices (bGenPart indices) rvec, for example: {7, 9}
+
+# I recommend checking page 7 of the pdf "Matching VBF-quarks with jets", where this method of choosing the bGenParts is explained
+
 ROOT.gInterpreter.Declare("""
 
 using namespace ROOT::VecOps;
