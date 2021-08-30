@@ -1,3 +1,8 @@
+# Event filters and variable definitions done by Vilja. Focus on the cuts that happens on Jets.
+
+# This is the original version and untouched by me. That's why it's not commented but I think the line are quite clear.
+# I recommend using the viljaFiltered_SalomaaMod.py since it's the most suitable for this coding project.
+
 def filtersAndcuts(df,nall,xsec):
         fj_cuts = 'FatJet_pt > 400 && abs(FatJet_eta) < 2.4 && FatJet_jetId & 2'
         df1 = df.Filter("nFatJet >= 2", "Events with >=2 AK8 jets")\

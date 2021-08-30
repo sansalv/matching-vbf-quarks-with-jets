@@ -1,3 +1,7 @@
+# Event filters and variable definitions done by Vilja. Focus on the cuts that happens on Jets.
+
+# I recommend using this filter since it's the same as the original but has more variable definitions that come handy often.
+
 def filtersAndcuts(df,nall,xsec):
         fj_cuts = 'FatJet_pt > 400 && abs(FatJet_eta) < 2.4 && FatJet_jetId & 2'
         df1 = df.Filter("nFatJet >= 2", "Events with >=2 AK8 jets")\

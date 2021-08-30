@@ -1,3 +1,12 @@
+# Event filters and variable definitions done by Vilja. Focus on the cuts that happens on Jets.
+
+# This differs from viljaFilter.py only on few lines regarding event filterings which make it looser filter:
+# 1) GoodFatJet_ms variable filters are changed from 110-150 and 100-145 GeV to 50-200 GeV
+# 2) ParticleNetMD_XbbVsQCD variable filters are changes from >0.9 to >0.1
+
+# This filter can be used if looser filter (about twice as many events than the original) is wanted.
+# Otherwise, I recommend using viljaFilter_SalomaaMod.py which is the most suitable fo this coding project.
+
 def filtersAndcuts(df,nall,xsec):
         fj_cuts = 'FatJet_pt > 400 && abs(FatJet_eta) < 2.4 && FatJet_jetId & 2'
         df1 = df.Filter("nFatJet >= 2", "Events with >=2 AK8 jets")\
