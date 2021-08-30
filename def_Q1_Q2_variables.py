@@ -1,3 +1,5 @@
+# Special new variables explained in main.ipynb and the pdf
+
 def define_Q1_Q2_variables(df):
     # eta
     df = df.Define('bGenPart_etaDiff01', 'bGenPart_eta_0-bGenPart_eta_1')\

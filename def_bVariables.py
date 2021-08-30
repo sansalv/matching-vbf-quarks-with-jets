@@ -1,10 +1,12 @@
 import ROOT
-
+#******************************************************************************************************
+# Mostly variable definitions regarding bGenPart
+#******************************************************************************************************
 def defbVariables(df):
     # New variable: abs(eta)
     df = df.Define('GenJet_absEta', 'abs(GenJet_eta)')
     #******************************************************************************************************
-    # bGenPart variables:
+    # bGenPart variables (using functions defined in bGenPartFunctions.py):
     #------------------------------------------------------------------------------------------------------
     df = df.Define('bestChildren_idxLists',
                    'FindBestChildren_indices(nGenPart, GenPart_pt, GenPart_genPartIdxMother)')
@@ -20,6 +22,10 @@ def defbVariables(df):
            .Define('bGenPart_mjj', 'InvariantMass(bGenPart_pt, bGenPart_eta, bGenPart_phi, bGenPart_mass)')\
            .Define('bGenPart_pdgId', 'Take(GenPart_pdgId, bestChildren_indices)')
     #******************************************************************************************************
+    # c++ function that gives 1 if match is close enough (deltaR < 0.4) and 0 if not
+    # This function is not that important. Sometimes it's nice to see or print this matching "status"
+    # returns rvec, for example: {0,1}
+    
     ROOT.gInterpreter.Declare("""
     
     using namespace ROOT::VecOps;    
@@ -39,7 +45,8 @@ def defbVariables(df):
     };
     """)
     #******************************************************************************************************
-    # bGetPart --> bGenJet:
+    # Find closest GenJet (bGenJet) for every bGenPart
+    # bGenPart --> bGenJet:
     #------------------------------------------------------------------------------------------------------
     df = df.Define('bGenJet_idx','FindClosest(bGenPart_phi, bGenPart_eta, GenJet_phi, GenJet_eta)')
 

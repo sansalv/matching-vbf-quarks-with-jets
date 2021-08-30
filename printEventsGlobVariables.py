@@ -1,3 +1,7 @@
+# Numpy dataframe and many variables (columns) for the printEvents function
+#******************************************************************************************************
+# Dictionary for the pdgIds
+
 pdgIdDir = {
     1: 'd',
     2: 'u',
@@ -51,6 +55,8 @@ pdgIdDir = {
     4332: 'Omega^0c'
 }
 #******************************************************************************************************
+# Dictionary for the statusFlags
+
 statusFlagsDir = {
     0: 'isPrompt',
     1: 'isDecayedLeptonHadron',
@@ -69,6 +75,8 @@ statusFlagsDir = {
     14: 'isLastCopyBeforeFSR'
 }
 #******************************************************************************************************
+# Columns needed (quite many)
+
 eventStuffList = ['nGenPart', 'GenPart_pdgId', 'GenPart_genPartIdxMother', 'GenPart_status', 'GenPart_statusFlags_intRVec',
                   'nB_weak', 'bGenJet_deltaR_lowerThan04', 'bJet_deltaR_lowerThan04',
                   'bGenPart_eta', 'bGenPart_phi', 'bGenPart_pt', 'bGenPart_pdgId',
@@ -86,8 +94,12 @@ eventStuffList = ['nGenPart', 'GenPart_pdgId', 'GenPart_genPartIdxMother', 'GenP
                   'VBFCandidates_jetId', 'VBFCandidates_puId',
                   'GoodJet_closestHiggsCandidateDeltaR']
 #******************************************************************************************************
-npdf=df0.AsNumpy(eventStuffList)
+# Numpy dataframe from df0
+
+npdf = df0.AsNumpy(eventStuffList)
 #******************************************************************************************************
+# Collect variable lists for every event
+
 m = len(npdf['nGenPart'])
 
 nGenPart = list(npdf['nGenPart'])
@@ -206,4 +218,3 @@ for i in range(m):
     VBFCandidates_mjj.append(npdf['VBFCandidates_mjj'][i])
     VBFCandidates_jetId.append(list(npdf['VBFCandidates_jetId'][i]))
     VBFCandidates_puId.append(list(npdf['VBFCandidates_puId'][i]))
-    #VBFCandidates_closestHiggsCandidateDeltaR.append(list(npdf['GoodJet_closestHiggsCandidateDeltaR'][i]))
